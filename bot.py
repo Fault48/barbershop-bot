@@ -431,7 +431,7 @@ def main():
     app.add_handler(CallbackQueryHandler(home_callback, pattern="^home$"))
 
     logger.info("Бот запущен!")
-    app.run_polling()
+    app.run_polling(drop_pending_updates=True)
 
 
 if __name__ == "__main__":

@@ -412,7 +412,8 @@ def main():
 
     conv = ConversationHandler(
         entry_points=[
-            CallbackQueryHandler(menu_button, pattern="^(book|my_appointments|cancel_start)$")
+            CallbackQueryHandler(menu_button, pattern="^(book|my_appointments|cancel_start)$"),
+            CallbackQueryHandler(cancel_start, pattern="^cancel_start$"),
         ],
         states={
             SELECT_MASTER: [CallbackQueryHandler(select_master, pattern="^(master_|home)")],
@@ -420,7 +421,7 @@ def main():
             SELECT_DATE: [CallbackQueryHandler(select_date, pattern="^(date_|back_)")],
             SELECT_TIME: [CallbackQueryHandler(select_time, pattern="^(time_|back_)")],
             CONFIRM: [CallbackQueryHandler(confirm_booking, pattern="^(confirm|home)$")],
-            CANCEL_SELECT: [CallbackQueryHandler(do_cancel, pattern="^(cancelid_|home)$")],
+            CANCEL_SELECT: [CallbackQueryHandler(do_cancel, pattern="^(cancelid_\\d+|home)$")],
         },
         fallbacks=[CallbackQueryHandler(home_callback, pattern="^home$")],
     )
